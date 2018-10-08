@@ -26,4 +26,18 @@ describe Oystercard do
     expect(@oyster.balance).to eq (5)
   end
 
+  it 'can touch in at the beginning of a journey' do
+    # @oyster.topup(10)
+    expect(@oyster.touch_in).to eq(true)
+  end
+
+  it 'can touch out at the end of a journey' do
+    expect(@oyster.touch_out).to eq(false)
+  end
+
+  it 'knows when the user is in transit' do
+    @oyster.touch_in
+    expect(@oyster).to be_in_journey
+  end
+
 end

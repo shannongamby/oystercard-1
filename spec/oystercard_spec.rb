@@ -27,7 +27,7 @@ describe Oystercard do
   end
 
   it 'can touch in at the beginning of a journey' do
-    # @oyster.topup(10)
+    @oyster.topup(10)
     expect(@oyster.touch_in).to eq(true)
   end
 
@@ -36,8 +36,14 @@ describe Oystercard do
   end
 
   it 'knows when the user is in transit' do
+    @oyster.topup(10)
     @oyster.touch_in
     expect(@oyster).to be_in_journey
   end
+
+  it 'does not allow user to touch in if balance is below minimum' do
+    expect{ @oyster.touch_in }.to raise_error 'Insufficient funds'
+  end
+
 
 end

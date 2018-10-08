@@ -9,8 +9,12 @@ class Oystercard
   end
 
   def topup(amount)
-    raise "Cannot topup #{amount}: maximum balance of £90" if (90 - @balance) < amount
+    raise "Cannot topup £#{amount}: maximum balance of £90" if (90 - @balance) < amount
     @balance += amount
+  end
+
+  def deduct(amount)
+    @balance -= amount
   end
 
 end

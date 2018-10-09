@@ -4,6 +4,7 @@ require 'station'
 
 describe Oystercard do
   let(:station) { double :station }
+  let(:station2) { double :station2 }
 
   it "starts with a balance of 0" do
     expect(subject.balance).to eq(0)
@@ -30,7 +31,7 @@ describe Oystercard do
   end
 
   it 'can touch out at the end of a journey' do
-    expect(subject.touch_out).to eq(nil)
+    expect(subject.touch_out(station)).to eq(nil)
   end
 
   it 'knows when the user is in transit' do
@@ -46,7 +47,7 @@ describe Oystercard do
   it 'charges the user £1 on touching out' do
     subject.topup(10)
     subject.touch_in(station)
-    expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MINIMUM_FARE)
+    expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_FARE)
   end
 
   it 'keeps a record of the starting station' do
@@ -58,8 +59,20 @@ describe Oystercard do
   it 'forgets entry station on touch out' do
     subject.topup(10)
     subject.touch_in(station)
-    subject.touch_out
+    subject.touch_out(station)
     expect(subject.start_station).to be_nil
+  end
+
+  it 'shows all previous trips' do
+    subject.topup(10)
+    subject.touch_in(station)
+    subject.touch_out(station2)
+    expect(subject.trips[0]["Start:"]).to eq(station)
+    expect(subject.trips[0]["End:"]).to eq(station2)
+  end
+
+  it "has an empty list of journeys by default" do
+    expect(subject.trips).to be_empty
   end
 
 end

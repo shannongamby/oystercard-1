@@ -2,7 +2,7 @@ require 'pry'
 
 class Oystercard
 
-  attr_reader :balance
+  attr_reader :balance, :start_station, :trips
 
   MINIMUM_BALANCE = 1
   MAXIMUM_BALANCE = 90
@@ -10,6 +10,7 @@ class Oystercard
 
   def initialize
     @balance = 0
+    @trips = []
   end
 
   def topup(amount)
@@ -22,16 +23,15 @@ class Oystercard
     @start_station = station
   end
 
-  def touch_out
+  def touch_out(station)
     deduct(MINIMUM_FARE)
+    @trips << {"Start:" => @start_station, "End:" => station }
     @start_station = nil
   end
 
   def in_journey?
     true if @start_station != nil
   end
-
-  attr_reader :start_station
 
   private
 

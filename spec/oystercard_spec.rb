@@ -41,17 +41,17 @@ describe Oystercard do
       subject.touch_in(station)
     end
 
-    it 'knows when the user is in transit' do
-      expect(subject).to be_in_journey
-    end
+    # it 'knows when the user is in transit' do
+    #   expect(subject).to be_in_journey
+    # end
 
     it 'charges the user £1 on touching out' do
       expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_FARE)
     end
 
-    it 'keeps a record of the starting station' do
-      expect(subject.start_station).to eq(station)
-    end
+    # it 'keeps a record of the starting station' do
+    #   expect(subject.start_station).to eq(station)
+    # end
 
     it 'forgets entry station on touch out' do
       subject.touch_out(station)
@@ -65,7 +65,7 @@ describe Oystercard do
     end
 
     it 'can touch out at the end of a journey' do
-      expect(subject.touch_out(station)).to eq(station)
+      expect(subject.touch_out(station)).to eq(subject.trips)
     end
 
   end

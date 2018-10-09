@@ -28,11 +28,12 @@ class Oystercard
   def touch_out(station)
     deduct(MINIMUM_FARE)
     @current_journey.finish(station)
+    @trips << @current_journey.trip
   end
 
-  def in_journey?
-    true if @start_station != nil
-  end
+  # def in_journey?
+  #   !@current_journey.complete?
+  # end
 
   private
 

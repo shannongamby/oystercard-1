@@ -1,5 +1,8 @@
 class Journey
 
+  MINIMUM_FARE = 1
+  PENALTY = 6
+
   def start(station)
     @start_station = station
   end
@@ -15,6 +18,10 @@ class Journey
 
   def complete?
     @complete
+  end
+
+  def fare
+    @complete ? MINIMUM_FARE : PENALTY
   end
 
 end

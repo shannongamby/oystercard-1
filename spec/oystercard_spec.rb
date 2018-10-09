@@ -64,14 +64,14 @@ describe Oystercard do
       expect(subject.trips[0]["End:"]).to eq(station2)
     end
 
+    it 'can touch out at the end of a journey' do
+      expect(subject.touch_out(station)).to eq(station)
+    end
+
   end
 
   it 'cannot store a balance above £90' do
     expect { subject.topup(91) }.to raise_error "Cannot topup £91: maximum balance of £#{Oystercard::MAXIMUM_BALANCE}"
-  end
-
-  it 'can touch out at the end of a journey' do
-    expect(subject.touch_out(station)).to eq(nil)
   end
 
   it 'does not allow user to touch in if balance is below minimum' do

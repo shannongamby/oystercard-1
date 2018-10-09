@@ -14,4 +14,10 @@ describe Journey do
     expect(subject.trip["End:"]).to eq(station)
   end
 
+  it 'should know if a journey is complete' do
+    subject.start(station)
+    subject.finish(station)
+    expect(subject.complete?).to eq true
+  end
+
 end

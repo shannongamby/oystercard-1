@@ -1,5 +1,5 @@
 require 'pry'
-require 'journey'
+require_relative 'journey'
 
 class Oystercard
 
@@ -21,14 +21,16 @@ class Oystercard
 
   def touch_in(station)
     raise 'Insufficient funds' if @balance < MINIMUM_BALANCE
+    @balance -= 6
     @current_journey = Journey.new
     @current_journey.start(station)
   end
 
   def touch_out(station)
-    deduct(MINIMUM_FARE)
+    @balance += 6
     @current_journey.finish(station)
     @trips << @current_journey.trip
+    @balance -= @current_journey.fare
   end
 
   # def in_journey?

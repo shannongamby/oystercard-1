@@ -68,6 +68,11 @@ describe Oystercard do
       expect(subject.touch_out(station)).to eq(subject.trips)
     end
 
+    it 'should be charged a penalty fare if not touched out' do
+      subject.touch_in(station)
+      expect(subject.balance).to eq(4)
+    end
+
   end
 
   it 'cannot store a balance above £90' do

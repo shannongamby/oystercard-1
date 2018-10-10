@@ -24,4 +24,8 @@ class Journey
     @complete
   end
 
+  def fare
+    MINIMUM_FARE
+  end
+
 end

@@ -63,7 +63,13 @@ describe Oystercard do
     end
 
     it 'should return a penalty fare of 6 if no exit station' do
+      subject.touch_in(station)
       expect(subject.balance).to eq 4
+    end
+
+    it 'should deduct a minimum fare after a complete journey' do
+      subject.touch_out(station)
+      expect(subject.balance).to eq 9
     end
 
   end

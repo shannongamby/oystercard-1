@@ -32,6 +32,12 @@ describe Oystercard do
       expect(subject.balance).to eq 10
     end
 
+
+    it 'should return a penalty fare of 6 if no entry station' do
+      subject.touch_out(station)
+      expect(subject.balance).to eq 4
+    end
+
   end
 
   context 'topup and touch in' do
@@ -40,18 +46,6 @@ describe Oystercard do
       subject.topup(10)
       subject.touch_in(station)
     end
-
-    # it 'knows when the user is in transit' do
-    #   expect(subject).to be_in_journey
-    # end
-
-    it 'charges the user £1 on touching out' do
-      expect { subject.touch_out(station) }.to change { subject.balance }.by(-Journey::MINIMUM_FARE)
-    end
-
-    # it 'keeps a record of the starting station' do
-    #   expect(subject.start_station).to eq(station)
-    # end
 
     it 'forgets entry station on touch out' do
       subject.touch_out(station)
@@ -68,9 +62,8 @@ describe Oystercard do
       expect(subject.touch_out(station)).to eq(subject.trips)
     end
 
-    it 'should be charged a penalty fare if not touched out' do
-      subject.touch_in(station)
-      expect(subject.balance).to eq(4)
+    it 'should return a penalty fare of 6 if no exit station' do
+      expect(subject.balance).to eq 4
     end
 
   end

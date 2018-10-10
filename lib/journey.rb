@@ -1,7 +1,8 @@
 class Journey
 
-  MINIMUM_FARE = 5
+  MINIMUM_FARE = 1
   PENALTY = 6
+
   def initialize
     @complete = false
   end
@@ -21,10 +22,6 @@ class Journey
 
   def complete?
     @complete
-  end
-
-  def fare
-    @complete ? MINIMUM_FARE : 6
   end
 
 end

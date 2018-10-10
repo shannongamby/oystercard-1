@@ -20,15 +20,4 @@ describe Journey do
     expect(subject.complete?).to eq true
   end
 
-  it 'should have a minimum fare' do
-    subject.start(station)
-    subject.finish(station)
-    expect(subject.fare).to eq(Journey::MINIMUM_FARE)
-  end
-
-  it 'should have a penalty fare of 6' do
-    subject.start(station)
-    expect(subject.fare).to eq(Journey::PENALTY)
-  end
-
 end

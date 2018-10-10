@@ -46,7 +46,7 @@ describe Oystercard do
     # end
 
     it 'charges the user £1 on touching out' do
-      expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_FARE)
+      expect { subject.touch_out(station) }.to change { subject.balance }.by(-Journey::MINIMUM_FARE)
     end
 
     # it 'keeps a record of the starting station' do

@@ -22,9 +22,8 @@ class Oystercard
 
   def touch_in(station)
     raise 'Insufficient funds' if @balance < MINIMUM_BALANCE
-    @journey.start(station)
     @trips << @journey.trip
-    penalty_for_no_exit if !trips.empty?
+    penalty_for_no_exit if trips[-1]["Start:"] != nil && trips[-1]["End:"] == nil
     @journey.start(station)
   end
 
@@ -36,7 +35,7 @@ class Oystercard
   end
 
   def penalty_for_no_exit
-    @balance -= Journey::PENALTY if trips.last["End:"] == nil
+    @balance -= Journey::PENALTY
   end
 
   private

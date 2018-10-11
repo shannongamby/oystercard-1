@@ -7,12 +7,11 @@ class JourneyLog
   end
 
   def start(station)
-    @journey = Journey.new
-    @journey.start(station)
+    current_journey.start(station)
   end
 
   def finish(station)
-    @journey.finish(station)
+    current_journey.finish(station)
     @journey_history << @journey
   end
 
@@ -22,4 +21,10 @@ class JourneyLog
     end.join('\n')
   end
 
+  private
+  
+  def current_journey
+    return @journey if !@journey.complete?
+    @journey = Journey.new
+  end
 end

@@ -32,4 +32,10 @@ describe Journey do
     expect(subject.fare).to eq Journey::PENALTY
   end
 
+  it "should charge the penalty fare if there's no exit station" do
+    subject.start(station)
+    subject.finish
+    expect(subject.fare).to eq Journey::PENALTY
+  end
+
 end

@@ -11,9 +11,9 @@ class Journey
     @start_station = station
   end
 
-  def finish(station)
+  def finish(station = nil)
     @end_station = station
-    @complete = true
+    @complete = true if station != nil && @start_station != nil
   end
 
   def trip

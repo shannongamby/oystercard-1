@@ -1,6 +1,7 @@
 require 'oystercard'
 require 'pry'
 require 'station'
+require 'journey_log'
 
 describe Oystercard do
   let(:station) { double :station }
@@ -13,7 +14,7 @@ describe Oystercard do
     end
 
     it "has an empty list of journeys by default" do
-      expect(subject.trips).to be_empty
+      expect(subject.trips.journeys).to eq "empty"
     end
 
   end
@@ -24,14 +25,9 @@ describe Oystercard do
       subject.topup(10)
     end
 
-    it 'can touch in at the beginning of a journey' do
-      expect(subject.touch_in(station)).to eq(station)
-    end
-
     it 'can be topped up' do
       expect(subject.balance).to eq 10
     end
-
 
     it 'should return a penalty fare of 6 if no entry station' do
       subject.touch_in
@@ -55,12 +51,7 @@ describe Oystercard do
 
     it 'shows all previous trips' do
       subject.touch_out(station2)
-      expect(subject.trips[0]["Start:"]).to eq(station)
-      expect(subject.trips[0]["End:"]).to eq(station2)
-    end
-
-    it 'can touch out at the end of a journey' do
-      expect(subject.touch_out(station)).to eq(subject.trips)
+      expect(subject.trips.journeys).to eq "From #{station} to #{station2}"
     end
 
     it 'should return a penalty fare of 6 if no exit station' do

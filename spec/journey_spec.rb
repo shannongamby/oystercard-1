@@ -1,5 +1,6 @@
 require 'journey'
 require 'oystercard'
+require 'pry'
 
 describe Journey do
 
@@ -24,6 +25,11 @@ describe Journey do
     subject.start(station)
     subject.finish(station)
     expect(subject.fare).to eq Journey::MINIMUM_FARE
+  end
+
+  it "should charge penalty fare if there is no entry station" do
+    subject.start
+    expect(subject.fare).to eq Journey::PENALTY
   end
 
 end

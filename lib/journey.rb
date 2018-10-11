@@ -7,7 +7,7 @@ class Journey
     @complete = false
   end
 
-  def start(station)
+  def start(station = nil)
     @start_station = station
   end
 
@@ -25,7 +25,7 @@ class Journey
   end
 
   def fare
-    MINIMUM_FARE
+    @complete ? MINIMUM_FARE : PENALTY
   end
 
 end

@@ -29,7 +29,7 @@ class Oystercard
 
   def touch_out(station)
     @journey.finish(station)
-    @balance -= Journey::PENALTY if @journey.trip["Start:"] == nil
+    @balance -= @journey.fare
     @trips[-1] = (@journey.trip) unless @trips.empty?
     @trips
   end

@@ -3,7 +3,7 @@ class Journey
   MINIMUM_FARE = 1
   PENALTY = 6
 
-  attr_reader :start_station
+  attr_reader :start_station, :end_station
 
   def initialize
     @complete = false
